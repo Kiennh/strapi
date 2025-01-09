@@ -551,7 +551,7 @@ class StrapiApp {
         permissions: {},
         theme: {
           availableThemes: [],
-          currentTheme: (localStorage.getItem(THEME_LOCAL_STORAGE_KEY) || 'system') as ThemeName,
+          currentTheme: (localStorage.getItem(THEME_LOCAL_STORAGE_KEY) || 'light') as ThemeName,
         },
         language: {
           locale: localeNames[locale] ? locale : 'en',

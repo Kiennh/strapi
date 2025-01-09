@@ -14,6 +14,11 @@ const globalStyles = `
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
+
+  #strapi {
+    background-image: url(https://server.zmedia.vn/static/cdn/mainpage.png);
+    background-size: cover;
+  }
 `;
 
 interface DefaultDocumentProps {

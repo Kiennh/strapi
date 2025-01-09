@@ -29,7 +29,7 @@ const LeftMenu = () => {
   const formatter = useCollator(locale, {
     sensitivity: 'base',
   });
-
+  const topMenu = ['api::glass-amc.glass-amc'];
   const menu = React.useMemo(
     () =>
       [
@@ -40,7 +40,16 @@ const LeftMenu = () => {
             defaultMessage: 'Collection Types',
           }),
           searchable: true,
-          links: collectionTypeLinks,
+          links: collectionTypeLinks.filter((link) => topMenu.includes(link.uid)),
+        },
+        {
+          id: 'collectionTypes',
+          title: formatMessage({
+            id: getTranslation('components.LeftMenu.collection'),
+            defaultMessage: 'Collection',
+          }),
+          searchable: true,
+          links: collectionTypeLinks.filter((link) => !topMenu.includes(link.uid)),
         },
         {
           id: 'singleTypes',
@@ -72,7 +81,7 @@ const LeftMenu = () => {
             };
           }),
       })),
-    [collectionTypeLinks, search, singleTypeLinks, includes, formatMessage, formatter]
+    [collectionTypeLinks, search, singleTypeLinks, includes, formatMessage, formatter, topMenu]
   );
 
   const handleClear = () => {
@@ -85,9 +94,8 @@ const LeftMenu = () => {
 
   const label = formatMessage({
     id: getTranslation('header.name'),
-    defaultMessage: 'Content',
+    defaultMessage: 'Content 1',
   });
-
   return (
     <SubNav ariaLabel={label}>
       <SubNavHeader
@@ -105,6 +113,7 @@ const LeftMenu = () => {
         {menu.map((section) => {
           return (
             <SubNavSection
+              collapsable={true}
               key={section.id}
               label={section.title}
               badgeLabel={section.links.length.toString()}
