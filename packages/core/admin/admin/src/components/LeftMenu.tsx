@@ -11,7 +11,7 @@ import {
   NavSections,
   NavUser,
 } from '@strapi/design-system/v2';
-import { useAppInfo, usePersistentState, useTracking } from '@strapi/helper-plugin';
+import { useAppInfo, usePersistentState, useTracking, useFetchClient } from '@strapi/helper-plugin';
 import { Exit, Write, Lightning } from '@strapi/icons';
 import { useIntl } from 'react-intl';
 import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
@@ -69,16 +69,23 @@ interface LeftMenuProps extends Pick<Menu, 'generalSectionLinks' | 'pluginsSecti
 const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }: LeftMenuProps) => {
   const navUserRef = React.useRef<HTMLDivElement>(null!);
   const [userLinksVisible, setUserLinksVisible] = React.useState(false);
+  const [data, setData] = React.useState({} as any);
   const {
     logos: { menu },
   } = useConfiguration('LeftMenu');
-  const [condensed, setCondensed] = usePersistentState('navbar-condensed', false);
+  const [condensed, setCondensed] = usePersistentState('navbar-condensed', true);
   const { userDisplayName } = useAppInfo();
   const { formatMessage } = useIntl();
   const { trackUsage } = useTracking();
   const { pathname } = useLocation();
   const { logout } = useAuth('Logout');
+  const { get } = useFetchClient();
 
+  React.useEffect(() => {
+    get('/path-amc/menu').then((resp) => {
+      setData(resp.data);
+    });
+  }, [get]);
   const initials = userDisplayName
     .split(' ')
     .map((name) => name.substring(0, 1))
@@ -107,6 +114,26 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }: LeftMenuProps) =
     id: 'app.components.LeftMenu.navbrand.title',
     defaultMessage: 'Strapi Dashboard',
   });
+
+  const plugins = React.useMemo(() => {
+    const userPlugins = Object.keys(data?.plugins || {}).find((role) =>
+      data.user.roles.map((userRole: any) => userRole.name).includes(role)
+    );
+    return typeof userPlugins === 'undefined'
+      ? pluginsSectionLinks
+      : pluginsSectionLinks.filter((p) => data?.plugins[userPlugins].includes(p.to));
+  }, [pluginsSectionLinks, data]);
+
+  const sectionLinks = React.useMemo(() => {
+    const userSettings = Object.keys(data?.settings || {}).find((role) =>
+      data.user.roles.map((userRole: any) => userRole.name).includes(role)
+    );
+    return typeof userSettings === 'undefined'
+      ? generalSectionLinks
+      : generalSectionLinks.filter((p) => data?.settings[userSettings].includes(p.to));
+  }, [generalSectionLinks, data]);
+
+  console.warn(pluginsSectionLinks, generalSectionLinks);
 
   return (
     <MainNav condensed={condensed}>
@@ -141,14 +168,14 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }: LeftMenuProps) =
           {formatMessage({ id: 'global.content-manager', defaultMessage: 'Content manager' })}
         </NavLink>
 
-        {pluginsSectionLinks.length > 0 ? (
+        {plugins.length > 0 ? (
           <NavSection
             label={formatMessage({
               id: 'app.components.LeftMenu.plugins',
               defaultMessage: 'Plugins',
             })}
           >
-            {pluginsSectionLinks.map((link) => {
+            {plugins.map((link) => {
               const LinkIcon = link.icon;
               return (
                 <NavLinkWrapper key={link.to}>
@@ -177,14 +204,14 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }: LeftMenuProps) =
           </NavSection>
         ) : null}
 
-        {generalSectionLinks.length > 0 ? (
+        {sectionLinks.length > 0 ? (
           <NavSection
             label={formatMessage({
               id: 'app.components.LeftMenu.general',
               defaultMessage: 'General',
             })}
           >
-            {generalSectionLinks.map((link) => {
+            {sectionLinks.map((link) => {
               const LinkIcon = link.icon;
 
               return (
