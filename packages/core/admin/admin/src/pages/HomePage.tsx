@@ -101,45 +101,9 @@ const HomePageCE = () => {
                             defaultMessage: 'Welcome on board!',
                           })}
                     </Typography>
-                    <WordWrap textColor="neutral600" variant="epsilon">
-                      {hasAlreadyCreatedContentTypes
-                        ? formatMessage({
-                            id: 'app.components.HomePage.welcomeBlock.content.again',
-                            defaultMessage:
-                              'We hope you are making progress on your project! Feel free to read the latest news about Strapi. We are giving our best to improve the product based on your feedback.',
-                          })
-                        : formatMessage({
-                            id: 'app.components.HomePage.welcomeBlock.content',
-                            defaultMessage:
-                              'Congrats! You are logged as the first administrator. To discover the powerful features provided by Strapi, we recommend you to create your first Content type!',
-                          })}
-                    </WordWrap>
-                    {hasAlreadyCreatedContentTypes ? (
-                      <Link isExternal href="https://strapi.io/blog">
-                        {formatMessage({
-                          id: 'app.components.HomePage.button.blog',
-                          defaultMessage: 'See more on the blog',
-                        })}
-                      </Link>
-                    ) : (
-                      <Button size="L" onClick={handleClick} endIcon={<ArrowRight />}>
-                        {formatMessage({
-                          id: 'app.components.HomePage.create',
-                          defaultMessage: 'Create your first Content type',
-                        })}
-                      </Button>
-                    )}
                   </Flex>
                 </Box>
               </div>
-            </GridItem>
-          </Grid>
-          <Grid gap={6}>
-            <GridItem col={8} s={12}>
-              {showGuidedTour ? <GuidedTourHomepage /> : <ContentBlocks />}
-            </GridItem>
-            <GridItem col={4} s={12}>
-              <SocialLinks />
             </GridItem>
           </Grid>
         </Box>
