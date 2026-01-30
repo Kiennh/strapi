@@ -1,0 +1,18 @@
+{
+  "name": "@strapi/plugin-oidc-auth",
+  "version": "1.0.0",
+  "description": "Override admin authentication with OIDC",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "Strapi Solutions SAS"
+  },
+  "strapi": {
+    "name": "oidc-auth",
+    "displayName": "OIDC Auth",
+    "description": "Override admin authentication with OIDC",
+    "kind": "plugin"
+  },
+  "dependencies": {
+    "openid-client": "^4.9.1"
+  }
+}
