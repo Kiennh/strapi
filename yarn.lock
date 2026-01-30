@@ -5916,6 +5916,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@panva/asn1.js@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@panva/asn1.js@npm:1.0.0"
+  checksum: 10c0/5d6e7ec460b65b017043e2702e25f323936baad2aa248dbd9bf54c9508e351d236bffac96fa033c6e36cb0482a9dd73c3605948a36a59bd6bec49353ba8d7b62
+  languageName: node
+  linkType: hard
+
 "@paralleldrive/cuid2@npm:2.2.2":
   version: 2.2.2
   resolution: "@paralleldrive/cuid2@npm:2.2.2"
@@ -9338,6 +9345,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@strapi/plugin-oidc-auth@workspace:packages/plugins/oidc-auth":
+  version: 0.0.0-use.local
+  resolution: "@strapi/plugin-oidc-auth@workspace:packages/plugins/oidc-auth"
+  dependencies:
+    openid-client: "npm:^4.9.1"
+  languageName: unknown
+  linkType: soft
+
 "@strapi/plugin-sentry@workspace:*, @strapi/plugin-sentry@workspace:packages/plugins/sentry":
   version: 0.0.0-use.local
   resolution: "@strapi/plugin-sentry@workspace:packages/plugins/sentry"
@@ -12476,7 +12491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aggregate-error@npm:^3.0.0":
+"aggregate-error@npm:^3.0.0, aggregate-error@npm:^3.1.0":
   version: 3.1.0
   resolution: "aggregate-error@npm:3.1.0"
   dependencies:
@@ -19264,7 +19279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:^11.8.2, got@npm:^11.8.5":
+"got@npm:^11.8.0, got@npm:^11.8.2, got@npm:^11.8.5":
   version: 11.8.6
   resolution: "got@npm:11.8.6"
   dependencies:
@@ -21717,6 +21732,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^2.0.5":
+  version: 2.0.7
+  resolution: "jose@npm:2.0.7"
+  dependencies:
+    "@panva/asn1.js": "npm:^1.0.0"
+  checksum: 10c0/228406f4635debd05922fa565a85c42c086426c1af03c4db2ce247d84f240d3f5985efa9540e6c90c89bab56476b1d1a0be2199740d1f497a37b075bbe2307e8
+  languageName: node
+  linkType: hard
+
 "jose@npm:^4.14.6":
   version: 4.15.5
   resolution: "jose@npm:4.15.5"
@@ -23228,7 +23252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-error@npm:1.x, make-error@npm:^1.1.1":
+"make-error@npm:1.x, make-error@npm:^1.1.1, make-error@npm:^1.3.6":
   version: 1.3.6
   resolution: "make-error@npm:1.3.6"
   checksum: 10c0/171e458d86854c6b3fc46610cfacf0b45149ba043782558c6875d9f42f222124384ad0b468c92e996d815a8a2003817a710c0a160e49c1c394626f76fa45396f
@@ -24989,6 +25013,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"object-hash@npm:^2.0.1":
+  version: 2.2.0
+  resolution: "object-hash@npm:2.2.0"
+  checksum: 10c0/1527de843926c5442ed61f8bdddfc7dc181b6497f725b0e89fcf50a55d9c803088763ed447cac85a5aa65345f1e99c2469ba679a54349ef3c4c0aeaa396a3eb9
+  languageName: node
+  linkType: hard
+
 "object-inspect@npm:^1.12.3, object-inspect@npm:^1.13.1":
   version: 1.13.2
   resolution: "object-inspect@npm:1.13.2"
@@ -25119,6 +25150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"oidc-token-hash@npm:^5.0.1":
+  version: 5.2.0
+  resolution: "oidc-token-hash@npm:5.2.0"
+  checksum: 10c0/4fa9a6f0a27c0b304aa2e4a37e433e871fb2e71418b62ada7305022ed7c70a4b325a81a4ee9661bf0c456cda0acdbeb564e68659bd6fe6a192b20bdec11688ea
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:2.4.1, on-finished@npm:^2.3.0":
   version: 2.4.1
   resolution: "on-finished@npm:2.4.1"
@@ -25215,6 +25253,21 @@ __metadata:
   bin:
     opener: bin/opener-bin.js
   checksum: 10c0/dd56256ab0cf796585617bc28e06e058adf09211781e70b264c76a1dbe16e90f868c974e5bf5309c93469157c7d14b89c35dc53fe7293b0e40b4d2f92073bc79
+  languageName: node
+  linkType: hard
+
+"openid-client@npm:^4.9.1":
+  version: 4.9.1
+  resolution: "openid-client@npm:4.9.1"
+  dependencies:
+    aggregate-error: "npm:^3.1.0"
+    got: "npm:^11.8.0"
+    jose: "npm:^2.0.5"
+    lru-cache: "npm:^6.0.0"
+    make-error: "npm:^1.3.6"
+    object-hash: "npm:^2.0.1"
+    oidc-token-hash: "npm:^5.0.1"
+  checksum: 10c0/88af2e7c17e62eaddd3f27e96567ef9c08dbd3266a6ff9c4e058128191d2d4ec07c49eaa523d9159953835fc90c59470270f6050872afb70c5c9576c387833e7
   languageName: node
   linkType: hard
 
