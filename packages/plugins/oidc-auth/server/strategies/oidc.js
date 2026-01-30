@@ -74,20 +74,19 @@ module.exports = {
           isActive: true,
           registrationToken: null,
         });
-      } else if (roleCodes.length > 0) {
+      } else {
+        // Sync roles for existing user
         const roles = await strapi.db.query('admin::role').findMany({
           where: { code: { $in: roleCodes } },
         });
 
-        if (roles.length > 0) {
-          const currentRoleIds = user.roles.map((r) => r.id).sort();
-          const newRoleIds = roles.map((r) => r.id).sort();
+        const currentRoleIds = user.roles.map((r) => r.id).sort();
+        const newRoleIds = roles.map((r) => r.id).sort();
 
-          if (JSON.stringify(currentRoleIds) !== JSON.stringify(newRoleIds)) {
-            user = await strapi.service('admin::user').updateById(user.id, {
-              roles: newRoleIds,
-            });
-          }
+        if (JSON.stringify(currentRoleIds) !== JSON.stringify(newRoleIds)) {
+          user = await strapi.service('admin::user').updateById(user.id, {
+            roles: newRoleIds,
+          });
         }
       }
 

@@ -25,11 +25,11 @@ async function main() {
     const issueLabelCount = labels.filter((label) => label.name.startsWith('pr: ')).length;
 
     if (sourceLabelCount !== 1) {
-      core.warning(`The PR must have one and only one 'source:' label.`);
+      core.setFailed(`The PR must have one and only one 'source:' label.`);
     }
 
     if (issueLabelCount !== 1) {
-      core.warning(`The PR must have one and only one 'pr:' label.`);
+      core.setFailed(`The PR must have one and only one 'pr:' label.`);
     }
 
     // NOTE: to avoid manual work, this is commented until we can set the workflow to trigger on pull_request milestone changes.

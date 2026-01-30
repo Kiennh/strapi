@@ -96,6 +96,9 @@ export default {
             const data = await response.json();
             if (data.access_token) {
               window.localStorage.setItem(STORAGE_KEYS.TOKEN, JSON.stringify(data.access_token));
+              if (data.refresh_token) {
+                window.sessionStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, JSON.stringify(data.refresh_token));
+              }
             }
           } catch (error) {
             console.error('Token refresh failed', error);

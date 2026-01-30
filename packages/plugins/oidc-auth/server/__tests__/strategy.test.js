@@ -37,6 +37,13 @@ describe('OIDC Auth Strategy', () => {
           },
         },
       },
+      // Explicitly mock methods for robustness as suggested by code review
+      plugin: jest.fn((name) => strapiMock.plugins[name]),
+      service: jest.fn((name) => {
+        if (name.startsWith('admin::')) {
+          return strapiMock.admin.services[name.split('admin::')[1]];
+        }
+      }),
       api: {},
       log: {
         error: jest.fn(),
